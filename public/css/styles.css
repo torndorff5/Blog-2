@@ -225,12 +225,13 @@ th {
 }
 
 /* Responsive Design Adjustments */
-@media (max-width: 992px) {
+@media (max-width: 768px) {
     .jumbotron .banner, .about-box {
         padding: 20px;
     }
     .about-pic{
-        height: 600px;
+        height: 400px;
+        width: 100%;
     }
     .navbar-header {
         text-align: center;
@@ -244,5 +245,6 @@ th {
 @media (max-width: 450px) {
     .about-pic{
         height: 300px;
+        width: 100%;
     }
 }
