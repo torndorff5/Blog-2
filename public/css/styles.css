@@ -62,17 +62,18 @@ a:active {
 .jumbotron h1{
     font-weight: bolder;
     color: black;
-    line-height: 0.7;
+    line-height: 0.8;
 }
 .display-4 {
     font-weight: 900;
     color: black;
-    line-height: 0.8;
+    line-height: 0.9;
     font-size: 24px;
     margin-top: 20px;
 }
 .buttons {
     display: flex;
+
 }
 .buttons .display-4{
     font-size: 16px;
@@ -115,6 +116,13 @@ a:active {
     padding: 20px;
     background-color: #fff;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: left;
+    font-size: 18px;
+}
+
+.contact-form .calculator {
+    text-align: center;
+    font-size: 24px;
 }
 
 .contact-form h1 {
@@ -123,15 +131,31 @@ a:active {
 }
 
 /* Styling form elements */
-.contact-form label {
+.contact-form label, .contact-form input, .contact-form button{
     margin-top: 10px;
     display: block;
     color: #333;
+    width: 100%;
+
+}
+
+.contact-form input, .contact-form button {
+    border-radius: 10px;
+    border: 1px solid #ddd;
+}
+
+.contact-form button {
+    background-color: #0A1172;
+    color: white;
+}
+.contact-form input:focus {
+    border: 1px solid #ddd;
 }
 
 .contact-form input[type="text"],
 .contact-form input[type="email"],
 .contact-form input[type="tel"],
+.contact-form input[type="number"],
 .contact-form select,
 .contact-form textarea {
     width: 100%;
@@ -141,20 +165,6 @@ a:active {
     border: 1px solid #ddd;
     border-radius: 5px;
     box-sizing: border-box; /* Makes sure padding doesn't affect the total width */
-}
-
-.contact-form input[type="submit"] {
-    background-color: #333;
-    color: #ffffff;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 70px;
-    cursor: pointer;
-    font-size: 16px;
-}
-
-.contact-form input[type="submit"]:hover {
-    background-color: #0A1172;
 }
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -209,6 +219,7 @@ th {
 
 .footer {
 	position: absolute;
+    top: 100%;
 	text-align: left;
 	width: 100%;
 	background-color: #333;
@@ -248,3 +259,6 @@ th {
         width: 100%;
     }
 }
+
+.form-step { display: none; }
+.form-step.active { display: block; }

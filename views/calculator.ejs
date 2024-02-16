@@ -1,59 +1,101 @@
 <%- include("partials/header"); -%>
 <div class="container">
-    <div class="calculator-container">
-        <h2>Mortgage Amortization Calculator</h2>
+    <div class="contact-form calculator">
         <form id="amortizationForm" action="/calculator" method="POST">
-            <label for="loanAmount">Loan Amount ($):</label>
-            <input type="number" id="loanAmount" name="loanAmount" required>
-
-            <label for="interestRate">Annual Interest Rate (%):</label>
-            <input type="number" step="0.01" id="interestRate" name="interestRate" required>
-
-            <label for="loanTerm">Loan Term (years):</label>
-            <input type="number" id="loanTerm" name="loanTerm" required>
-
-            <button type="submit" class="btn-main" >Calculate</button>
+            <div id="step1" class="form-step active">
+                <label for="loanAmount">Potential Loan Amount ($)</label>
+                <input type="number" id="loanAmount" name="loanAmount" required>
+                <button type="button" class="btn-main" onclick="nextStep()">Next</button>
+            </div>
+            <div id="step2" class="form-step">
+                <label for="interestRate">Projected Interest Rate (%)</label>
+                <input type="number" step="0.01" id="interestRate" name="interestRate" required>
+                <button type="button" class="btn-main" onclick="nextStep()">Next</button>
+            </div>
+            <div id="step3" class="form-step">
+                <label for="loanTerm">Loan Term (years):</label>
+                <input type="number" id="loanTerm" name="loanTerm" required>
+                <button type="button" class="btn-main" onclick="nextStep()">Next</button>
+            </div>
+            <div id="step4" class="form-step">
+                <label for="annualIncome">Annual Income:</label>
+                <input type="number" id="annualIncome" name="annualIncome" required>
+                <button type="button" class="btn-main" onclick="nextStep()">Next</button>
+            </div>
+            <div id="step5" class="form-step">
+                <label for="fullName">Name</label>
+                <input type="text" id="fullName" name="fullName" required>
+                <button type="button" class="btn-main" onclick="nextStep()">Next</button>
+            </div>
+            <div id="step6" class="form-step">
+                <label for="emai">Email</label>
+                <input type="email" id="emai" name="emai" required>
+                <button type="button" class="btn-main" onclick="nextStep()">Next</button>
+            </div>
+            <div id="step7" class="form-step">
+                <label for="phone">Phone Number</label>
+                <input type="tel" id="phone" name="phone" required>
+                <button type="submit" class="btn-main" >Calculate</button>
+            </div>
         </form>
-        <div id="amortizationSchedule">
-            <h2>Amortization Schedule</h2>
-            <table>
-                <thead>
-                <tr>
-                    <th>Month</th>
-                    <th>Total Payment</th>
-                    <th>Principal Payment</th>
-                    <th>Interest Payment</th>
-                    <th>Remaining Balance</th>
-                </tr>
-                </thead>
-                <tbody>
-                <% if(typeof amortizationSchedule !== 'undefined' && amortizationSchedule) { %>
-                    <% amortizationSchedule.forEach(function(row) { %>
-                        <tr>
-                            <td><%= row.month %></td>
-                            <td>$<%= row.totalPayment.toFixed(2) %></td>
-                            <td>$<%= row.principalPayment.toFixed(2) %></td>
-                            <td>$<%= row.interestPayment.toFixed(2) %></td>
-                            <td>$<%= row.balance.toFixed(2) %></td>
-                        </tr>
-                    <% }); %>
-                <% } else { %>
-                    <tr>
-                        <td>0.0</td>
-                        <td>0.0</td>
-                        <td>0.0</td>
-                        <td>0.0</td>
-                        <td>0.0</td>
-                    </tr>
-                <% } %>
+        <script>
+            let currentStep = 1;
 
-                </tbody>
-            </table>
-        </div>
+            function showStep(step) {
+                // Hide all steps
+                document.querySelectorAll('.form-step').forEach(step => {
+                    step.classList.remove('active');
+                });
+                // Show the current step
+                document.querySelector(`#step${step}`).classList.add('active');
+                currentStep = step;
+            }
+
+            function nextStep() {
+                // Proceed to the next step
+                const next = currentStep + 1;
+                showStep(next);
+            }
+        </script>
+<!--        <div id="amortizationSchedule">-->
+<!--            <h2>Amortization Schedule</h2>-->
+<!--            <table>-->
+<!--                <thead>-->
+<!--                <tr>-->
+<!--                    <th>Month</th>-->
+<!--                    <th>Total Payment</th>-->
+<!--                    <th>Principal Payment</th>-->
+<!--                    <th>Interest Payment</th>-->
+<!--                    <th>Remaining Balance</th>-->
+<!--                </tr>-->
+<!--                </thead>-->
+<!--                <tbody>-->
+<!--                <% if(typeof amortizationSchedule !== 'undefined' && amortizationSchedule) { %>-->
+<!--                    <% amortizationSchedule.forEach(function(row) { %>-->
+<!--                        <tr>-->
+<!--                            <td><%= row.month %></td>-->
+<!--                            <td>$<%= row.totalPayment.toFixed(2) %></td>-->
+<!--                            <td>$<%= row.principalPayment.toFixed(2) %></td>-->
+<!--                            <td>$<%= row.interestPayment.toFixed(2) %></td>-->
+<!--                            <td>$<%= row.balance.toFixed(2) %></td>-->
+<!--                        </tr>-->
+<!--                    <% }); %>-->
+<!--                <% } else { %>-->
+<!--                    <tr>-->
+<!--                        <td>0.0</td>-->
+<!--                        <td>0.0</td>-->
+<!--                        <td>0.0</td>-->
+<!--                        <td>0.0</td>-->
+<!--                        <td>0.0</td>-->
+<!--                    </tr>-->
+<!--                <% } %>-->
+
+<!--                </tbody>-->
+<!--            </table>-->
+<!--        </div>-->
     </div>
 
 </div>
 
-
-
-<%- include("partials/footer"); -%>
+</body>
+</html>

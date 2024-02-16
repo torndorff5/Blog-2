@@ -1,6 +1,7 @@
 //jshint esversion:6
 
 const express = require("express");
+const session = require('express-session');
 const bodyParser = require("body-parser");
 const ejs = require("ejs");
 const mongoose = require("mongoose");
@@ -17,8 +18,12 @@ const transporter = nodemailer.createTransport({
     pass: 'trvvnivktrixywoo'
   }
 });
-const app = express();
+let USDollar = new Intl.NumberFormat('en-US', {
+  style: 'currency',
+  currency: 'USD',
+});
 
+const app = express();
 app.set('view engine', 'ejs');
 
 app.use(bodyParser.urlencoded({extended: true}));
@@ -57,12 +62,12 @@ function calculateAmortization(principal, annualInterestRate, termYears) {
 
   return schedule;
 }
-function sendMail(name, email, loan, msg, phone){
+function sendMail(to, text){
   let mailOptions = {
     from: my_email,
-    to: 'sreichner32@gmail.com',
-    subject: `MORTGAGE LEAD: ${name}`,
-    text: `Name: ${name}\n Email: ${email}\n Phone: ${phone}\n Loan Type: ${loan}\n Message: ${msg}\n`
+    to: to,
+    subject: `MORTGAGE LEAD!!!!`,
+    text: text
   };
   transporter.sendMail(mailOptions, function(error, info) {
     if (error) {
@@ -157,18 +162,24 @@ app.get("/loan-programs", function(req, res){
 });
 
 app.get("/calculator", function(req, res){
-  res.render("calculator");
+  // Determine the step from the query string, default to step 1
+  const step = req.query.step ? parseInt(req.query.step) : 1;
+  res.render("calculator", { step: step });
 })
 
+
 app.post("/calculator", function(req, res){
-  let principal = req.body.loanAmount;
-  let annualInterest = req.body.interestRate;
-  let term = req.body.loanTerm;
-  let amortization = calculateAmortization(principal, annualInterest, term);
-  console.log(amortization);
-  res.render("calculator", {
-    amortizationSchedule: amortization
-  });
+  let amortization = calculateAmortization(req.body.loanAmount, req.body.interestRate, req.body.loanTerm);
+  const text = `Loan Amount : ${USDollar.format(req.body.loanAmount)}
+    Interest Rate : ${req.body.interestRate}
+    Loan Term : ${req.body.loanTerm}
+    Annual Income: ${USDollar.format(req.body.annualIncome)}
+    Name : ${req.body.fullName}
+    Email : ${req.body.emai}
+    Phone : ${req.body.phone}
+    Monthly: ${USDollar.format(amortization[0].totalPayment)}`
+  sendMail("sreichner32@gmail.com", text);
+  res.render("thanks");
 });
 
 app.listen(port, function() {
