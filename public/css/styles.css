@@ -51,7 +51,8 @@ a:active {
 .about-pic{
     background-image: url('ScottReichner.jpeg');
     height: 500px;
-    width: 400px;
+    width: auto;
+    max-width: 400px;
     background-size: cover;
     border-radius: 15px;
 }
@@ -223,3 +224,25 @@ th {
     margin: 0 15%;
 }
 
+/* Responsive Design Adjustments */
+@media (max-width: 992px) {
+    .jumbotron .banner, .about-box {
+        padding: 20px;
+    }
+    .about-pic{
+        height: 600px;
+    }
+    .navbar-header {
+        text-align: center;
+    }
+
+    .card {
+        padding: 20px;
+    }
+}
+
+@media (max-width: 450px) {
+    .about-pic{
+        height: 300px;
+    }
+}

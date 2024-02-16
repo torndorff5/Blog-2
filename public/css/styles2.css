@@ -1,0 +1,104 @@
+/* General Body Styles */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #333;
+    background-color: #f4f4f4;
+    padding-bottom: 100px; /* To ensure content doesn't overlap with the footer */
+}
+
+/* Navigation Bar */
+.navbar-default {
+    background-color: #fff;
+    border-color: #e7e7e7;
+    box-shadow: 0 2px 4px rgba(0,0,0,.1);
+}
+
+.navbar-brand a, .navbar-default .navbar-nav > li > a {
+    color: #0A1172;
+}
+
+.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
+    color: #012030;
+    background-color: transparent;
+}
+
+/* Jumbotron Customization */
+.jumbotron {
+    background-color: transparent;
+    color: inherit;
+}
+
+.jumbotron .banner {
+    text-align: center;
+    padding: 50px 25px; /* Adjusted for mobile responsiveness */
+}
+
+.jumbotron h1, .jumbotron .display-4 {
+    color: #333;
+}
+
+/* Buttons */
+.btn-jumbo, .btn-main {
+    font-size: 18px; /* Larger font size for readability */
+    border-radius: 50px; /* More pronounced rounded corners */
+    padding: 10px 30px;
+}
+
+.btn-jumbo:hover, .btn-main:hover {
+    color: #fff;
+}
+
+/* About Section */
+.about-box {
+    margin: 5% 10%;
+    text-align: justify;
+}
+
+.about-pic {
+    background-size: cover;
+    background-position: center;
+    border-radius: 15px;
+}
+
+/* Card Customization */
+.card {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,.1);
+    margin-bottom: 20px;
+}
+
+.card h1 {
+    font-size: 24px;
+}
+
+/* Footer */
+.footer {
+    background-color: #333;
+    color: #fff;
+    padding: 20px 0;
+    position: relative;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+}
+
+.footer p {
+    text-align: center;
+}
+
+/* Responsive Design Adjustments */
+@media (max-width: 768px) {
+    .jumbotron .banner, .about-box {
+        padding: 20px;
+    }
+
+    .navbar-header {
+        text-align: center;
+    }
+
+    .card {
+        padding: 20px;
+    }
+}
