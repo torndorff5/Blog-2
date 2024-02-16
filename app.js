@@ -5,11 +5,18 @@ const bodyParser = require("body-parser");
 const ejs = require("ejs");
 const mongoose = require("mongoose");
 const _ = require("lodash");
-
+const nodemailer = require("nodemailer");
 const homeStartingContent = "Lacus vel facilisis volutpat est velit egestas dui id ornare. Semper auctor neque vitae tempus quam. Sit amet cursus sit amet dictum sit amet justo. Viverra tellus in hac habitasse. Imperdiet proin fermentum leo vel orci porta. Donec ultrices tincidunt arcu non sodales neque sodales ut. Mattis molestie a iaculis at erat pellentesque adipiscing. Magnis dis parturient montes nascetur ridiculus mus mauris vitae ultricies. Adipiscing elit ut aliquam purus sit amet luctus venenatis lectus. Ultrices vitae auctor eu augue ut lectus arcu bibendum at. Odio euismod lacinia at quis risus sed vulputate odio ut. Cursus mattis molestie a iaculis at erat pellentesque adipiscing.";
 const aboutContent = "Hac habitasse platea dictumst vestibulum rhoncus est pellentesque. Dictumst vestibulum rhoncus est pellentesque elit ullamcorper. Non diam phasellus vestibulum lorem sed. Platea dictumst quisque sagittis purus sit. Egestas sed sed risus pretium quam vulputate dignissim suspendisse. Mauris in aliquam sem fringilla. Semper risus in hendrerit gravida rutrum quisque non tellus orci. Amet massa vitae tortor condimentum lacinia quis vel eros. Enim ut tellus elementum sagittis vitae. Mauris ultrices eros in cursus turpis massa tincidunt dui.";
 const contactContent = "Scelerisque eleifend donec pretium vulputate sapien. Rhoncus urna neque viverra justo nec ultrices. Arcu dui vivamus arcu felis bibendum. Consectetur adipiscing elit duis tristique. Risus viverra adipiscing at in tellus integer feugiat. Sapien nec sagittis aliquam malesuada bibendum arcu vitae. Consequat interdum varius sit amet mattis. Iaculis nunc sed augue lacus. Interdum posuere lorem ipsum dolor sit amet consectetur adipiscing elit. Pulvinar elementum integer enim neque. Ultrices gravida dictum fusce ut placerat orci nulla. Mauris in aliquam sem fringilla ut morbi tincidunt. Tortor posuere ac ut consequat semper viverra nam libero.";
-
+const my_email = "torndorff5@gmail.com"
+const transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: my_email,
+    pass: 'trvvnivktrixywoo'
+  }
+});
 const app = express();
 
 app.set('view engine', 'ejs');
@@ -23,6 +30,48 @@ const postSchema = {
   title: String,
   content: String
 };
+
+function calculateAmortization(principal, annualInterestRate, termYears) {
+  const monthlyInterestRate = annualInterestRate / 12 / 100;
+  const totalPayments = termYears * 12;
+  const monthlyPayment = principal * monthlyInterestRate / (1 - Math.pow(1 + monthlyInterestRate, -totalPayments));
+
+  let currentBalance = principal;
+  let schedule = [];
+
+  for (let month = 1; month <= totalPayments; month++) {
+    const interestForMonth = currentBalance * monthlyInterestRate;
+    const principalForMonth = monthlyPayment - interestForMonth;
+    currentBalance -= principalForMonth;
+
+    schedule.push({
+      month: month,
+      totalPayment: monthlyPayment,
+      principalPayment: principalForMonth,
+      interestPayment: interestForMonth,
+      balance: currentBalance > 0 ? currentBalance : 0
+    });
+
+    if (currentBalance <= 0) break;
+  }
+
+  return schedule;
+}
+function sendMail(name, email, loan, msg, phone){
+  let mailOptions = {
+    from: my_email,
+    to: 'sreichner32@gmail.com',
+    subject: `MORTGAGE LEAD: ${name}`,
+    text: `Name: ${name}\n Email: ${email}\n Phone: ${phone}\n Loan Type: ${loan}\n Message: ${msg}\n`
+  };
+  transporter.sendMail(mailOptions, function(error, info) {
+    if (error) {
+      console.log(error);
+    } else {
+      console.log('Email sent: ' + info.response);
+    }
+  });
+}
 
 const Post = mongoose.model("Post", postSchema);
 
@@ -85,6 +134,41 @@ app.get("/about", function(req, res){
 
 app.get("/contact", function(req, res){
   res.render("contact", {contactContent: contactContent});
+});
+
+app.post("/contact", function(req, res){
+  //grab info
+  let name = req.body.fullName;
+  let email = req.body.emai;
+  let phone = req.body.phone;
+  let loan = req.body.loanType;
+  let msg = req.body.msg;
+  //send email to sreichner32@gmail.com
+  sendMail(name, email, loan, phone, msg);
+  res.render("thanks");
+});
+
+app.get("/thanks", function(req, res){
+  res.render("thanks");
+})
+
+app.get("/loan-programs", function(req, res){
+  res.render("loan-programs");
+});
+
+app.get("/calculator", function(req, res){
+  res.render("calculator");
+})
+
+app.post("/calculator", function(req, res){
+  let principal = req.body.loanAmount;
+  let annualInterest = req.body.interestRate;
+  let term = req.body.loanTerm;
+  let amortization = calculateAmortization(principal, annualInterest, term);
+  console.log(amortization);
+  res.render("calculator", {
+    amortizationSchedule: amortization
+  });
 });
 
 app.listen(port, function() {

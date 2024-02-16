@@ -1,0 +1,25 @@
+<div class="contact-form">
+    <h1>Looking to Purchase or Refi? Let's talk.</h1>
+    <form action="/contact" method="POST">
+        <label for="fullName">Full Name:</label><br>
+        <input type="text" id="fullName" name="fullName" required><br>
+
+        <label for="emai">Email:</label><br>
+        <input type="emai" id="emai" name="emai" required><br>
+
+        <label for="phone">Phone Number:</label><br>
+        <input type="tel" id="phone" name="phone" required><br>
+
+        <label for="loanType">Loan Type:</label><br>
+        <select id="loanType" name="loanType" required>
+            <option value="purchase">Purchase</option>
+            <option value="refinance">Refinance</option>
+            <option value="specialized">Specialized Loan</option>
+        </select><br>
+
+        <label for="msg">Message:</label><br>
+        <textarea id="msg" name="msg" rows="4" cols="50"></textarea><br>
+
+        <input type="submit" value="Submit">
+    </form>
+</div>

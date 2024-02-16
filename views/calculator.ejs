@@ -1,0 +1,59 @@
+<%- include("partials/header"); -%>
+<div class="container">
+    <div class="calculator-container">
+        <h2>Mortgage Amortization Calculator</h2>
+        <form id="amortizationForm" action="/calculator" method="POST">
+            <label for="loanAmount">Loan Amount ($):</label>
+            <input type="number" id="loanAmount" name="loanAmount" required>
+
+            <label for="interestRate">Annual Interest Rate (%):</label>
+            <input type="number" step="0.01" id="interestRate" name="interestRate" required>
+
+            <label for="loanTerm">Loan Term (years):</label>
+            <input type="number" id="loanTerm" name="loanTerm" required>
+
+            <button type="submit" class="btn-main" >Calculate</button>
+        </form>
+        <div id="amortizationSchedule">
+            <h2>Amortization Schedule</h2>
+            <table>
+                <thead>
+                <tr>
+                    <th>Month</th>
+                    <th>Total Payment</th>
+                    <th>Principal Payment</th>
+                    <th>Interest Payment</th>
+                    <th>Remaining Balance</th>
+                </tr>
+                </thead>
+                <tbody>
+                <% if(typeof amortizationSchedule !== 'undefined' && amortizationSchedule) { %>
+                    <% amortizationSchedule.forEach(function(row) { %>
+                        <tr>
+                            <td><%= row.month %></td>
+                            <td>$<%= row.totalPayment.toFixed(2) %></td>
+                            <td>$<%= row.principalPayment.toFixed(2) %></td>
+                            <td>$<%= row.interestPayment.toFixed(2) %></td>
+                            <td>$<%= row.balance.toFixed(2) %></td>
+                        </tr>
+                    <% }); %>
+                <% } else { %>
+                    <tr>
+                        <td>0.0</td>
+                        <td>0.0</td>
+                        <td>0.0</td>
+                        <td>0.0</td>
+                        <td>0.0</td>
+                    </tr>
+                <% } %>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+
+
+
+<%- include("partials/footer"); -%>

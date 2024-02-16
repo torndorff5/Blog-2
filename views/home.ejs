@@ -1,16 +1,83 @@
 
 <%- include("partials/header"); -%>
 
-  <%  posts.forEach(function(post){ %>
+<div class="jumbotron jumbotron-fluid">
+  <div class="col-md-6 banner">
+    <div class="container">
+      <h1 class="display-4">Get a Great Rate on a New Mortgage</h1>
+      <div class="display-4">
+        See How Much You Can Afford or How Much You Can Save for FREE.
+      </div>
+      <div class="buttons">
+          <form action="/contact" method="GET">
+            <button class="display-4 btn-jumbo" type="submit">Purchase or Refi</button>
+          </form>
+          <form action="/calculator" method="GET">
+            <button class="display-4 btn-jumbo" type="submit">Calculate my Payment</button>
+          </form>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-6">
+    <div class="about-box">
+      <h1>Serving Flathead Valley for 28 years.</h1>
+      <p>Hello there, I'm Scott Reichner, the heart and soul behind Flathead Mortgage Inc. With 28 years of experience in the Flathead Valley, my journey from raising children to serving as a state senator has been driven by my deep-seated Montana pride. At Flathead Mortgage, we're not just processing loans; we're redefining the mortgage industry with a commitment to exceptional service and a personal touch. Guiding you through every step of the home loan process, we aim to find the perfect loan for you and stand by you all the way to homeownership.</p>
+      <p>Our relationship extends beyond transactions; we strive to be your lifelong partner for all your home loan needs, earning your trust and exceeding expectations. Experience our dedication to personal service by applying online or calling us for a free, personalized consultation. Join us on this journey to homeownership—it's quick, secure, and embodies the simplicity we value in Montana. Looking forward to connecting with you.</p>
+      <p> Scott</p>
+    </div>
+    </div>
+  <div class="col-md-6">
+    <div class="about-box">
+      <div class="about-pic"></div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="container">
+    <div class="col-md-4 card">
+      <span><i class="fa-solid fa-user"></i></span>
+      <h1>About Us</h1>
+      <p>Our dedication to exceptional customer service places your needs at the forefront of everything we do. Leverage our extensive expertise in the residential lending sector by initiating your application online now.</p>
+      <form action="/contact" method="GET">
+        <button class="display-4 btn-main" type="submit">Contact Us</button>
+      </form>
+    </div>
+    <div class="col-md-4 card">
+      <span><i class="fa-solid fa-house"></i></span>
+      <h1>Loan Programs</h1>
+      <p>At Flathead Mortgage Inc., we offer a loan program perfectly suited to your needs. Whether you're seeking to purchase, refinance, or explore specialized loan options, our team is equipped to assist you.</p>
+      <form action="/loan-programs" method="GET">
+        <button class="display-4 btn-main" type="submit">Learn More</button>
+      </form>
+    </div>
+    <div class="col-md-4 card">
+      <span><i class="fa-solid fa-calculator"></i></span>
+      <h1>Calculator</h1>
+      <p>Explore our comprehensive suite of calculators and tools designed to jumpstart your journey. Then, let's connect for a personalized consultation, free of charge, to tailor our services to your unique needs.</p>
+      <form action="/calculator" method="GET">
+        <button class="display-4 btn-main" type="submit">Calculate</button>
+      </form>
+    </div>
+  </div>
 
-    <h1><%=post.title%></h1>
-    <p>
-    <%=post.content.substring(0, 100) + " ..."%>
-    <a href="/posts/<%=post.title%>">Read More</a>
-    </p>
+</div>
 
 
-    <% }) %>
+
+
+
+<!--  <%  posts.forEach(function(post){ %>-->
+
+<!--    <h1><%=post.title%></h1>-->
+<!--    <p>-->
+<!--    <%=post.content.substring(0, 100) + " ..."%>-->
+<!--    <a href="/posts/<%=post.title%>">Read More</a>-->
+<!--    </p>-->
+
+
+<!--    <% }) %>-->
 
 
 <%- include("partials/footer"); -%>

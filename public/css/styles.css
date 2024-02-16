@@ -2,6 +2,18 @@ html {
   min-height: 100%;
   position: relative;
 }
+a:link {
+    text-decoration: none;
+}
+a:visited {
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: none;
+}
+a:active {
+    text-decoration: none;
+}
 
 .container-fluid {
     padding-top: 70px;
@@ -14,27 +26,200 @@ html {
     border-radius: 0;
     margin-bottom: 0;
     font-size: 12px;
-    letter-spacing: 5px;
+    letter-spacing: 1px;
+    font-weight: bolder;
 }
-.navbar-nav  li a:hover {
-    color: #1abc9c !important;
+.navbar-header a {
+    color: #0A1172;
+}
+.navbar-header a:hover {
+    color: black;
 }
 
+.navbar-nav  li a:hover {
+    color: #012030 !important;
+}
+.banner {
+    margin-top:100px;
+}
+.jumbotron-fluid{
+    background-image: url("https://images.pexels.com/photos/534394/pexels-photo-534394.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2");
+    background-position: center;
+    background-size: cover;
+    height: 500px;
+}
+.about-pic{
+    background-image: url('ScottReichner.jpeg');
+    height: 500px;
+    width: 400px;
+    background-size: cover;
+    border-radius: 15px;
+}
+.about-box{
+    margin: 15%;
+}
+.jumbotron h1{
+    font-weight: bolder;
+    color: black;
+    line-height: 0.7;
+}
+.display-4 {
+    font-weight: 900;
+    color: black;
+    line-height: 0.8;
+    font-size: 24px;
+    margin-top: 20px;
+}
+.buttons {
+    display: flex;
+}
+.buttons .display-4{
+    font-size: 16px;
+}
+.btn-jumbo {
+    border-radius: 80px;
+    background-color: white;
+    padding: 20px;
+    border-color: white;
+    border-style: hidden;
+    margin-right: 20px;
+}
+.btn-jumbo:hover {
+    background-color: #0A1172;
+    color: white;
+}
+.card{
+    padding: 50px;
+    text-align: center;
+}
+.card span {
+    font-size: 80pt;
+}
+.btn-main {
+    padding: 15px;
+    border-radius: 70px;
+    border-style: hidden;
+    background-color: #0A1172;
+    color: white;
+    margin-top: 15px;
+    margin-right: 0;
+}
+.btn-main:hover {
+    background-color: #333;
+}
+
+.contact-form {
+    margin: 20px auto;
+    max-width: 600px;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.contact-form h1 {
+    text-align: center;
+    color: #333;
+}
+
+/* Styling form elements */
+.contact-form label {
+    margin-top: 10px;
+    display: block;
+    color: #333;
+}
+
+.contact-form input[type="text"],
+.contact-form input[type="email"],
+.contact-form input[type="tel"],
+.contact-form select,
+.contact-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-sizing: border-box; /* Makes sure padding doesn't affect the total width */
+}
+
+.contact-form input[type="submit"] {
+    background-color: #333;
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 70px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.contact-form input[type="submit"]:hover {
+    background-color: #0A1172;
+}
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #333;
+    line-height: 1.6;
+    background-color: #f4f4f4;
+}
+
+h1, h2 {
+    color: #0A1172; /* A professional blue tone */
+    margin-bottom: 20px;
+}
+
+
+p {
+    margin-bottom: 20px;
+    text-align: justify;
+    text-justify: inter-word;
+}
+
+.about-card {
+    max-width: 800px; /* or your preferred width */
+    margin: auto;
+    padding: 20px;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    overflow-y: auto;
+    max-height: 600px;
+}
+table, th, td {
+    border: 1px solid black;
+}
+thead{
+    position: sticky;
+    top: 0;
+}
+th, td {
+    padding: 10px;
+    text-align: left;
+}
+th {
+    background-color: #f2f2f2;
+}
+.calculator-container {
+    margin: 50px;
+}
 .footer-padding {
 	padding-bottom: 60px;
 }
 
 .footer {
 	position: absolute;
-	text-align: center;
-	bottom: 0;
+	text-align: left;
 	width: 100%;
-	height: 60px;
-	background-color: #1abc9c;
+	background-color: #333;
+    color: #fff;
+}
+.footer-box {
+    margin: 15% 15% 10% 30%;
 }
 
 .footer p {
-	margin-top: 25px;
-	font-size: 12px;
-  color: #fff;
+    color: #fff;
+    text-align: center;
+    margin: 0 15%;
 }
+
