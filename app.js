@@ -148,8 +148,13 @@ app.post("/contact", function(req, res){
   let phone = req.body.phone;
   let loan = req.body.loanType;
   let msg = req.body.msg;
+  const text = `Name : ${req.body.fullName}
+    Email : ${req.body.emai}
+    Phone : ${req.body.phone}
+    Loan Type : ${req.body.loanType}
+    Message : ${req.body.msg}`
   //send email to sreichner32@gmail.com
-  sendMail(name, email, loan, phone, msg);
+  sendMail(my_email, text);
   res.render("thanks");
 });
 
@@ -178,7 +183,7 @@ app.post("/calculator", function(req, res){
     Email : ${req.body.emai}
     Phone : ${req.body.phone}
     Monthly: ${USDollar.format(amortization[0].totalPayment)}`
-  sendMail("sreichner32@gmail.com", text);
+  sendMail(my_email, text);
   res.render("thanks");
 });
 
